@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    @include("html/head.html", {"title": "Ещё компоненты", "description": "Табы, селекты, маски, параллакс и другое"})
+  </head>
+  <body>
+    <div class="wrapper">
+      @include("html/header.html")
+      <main>
+        <section class="section">
+          <div class="container">
+            <h1 class="section__title">Ещё компоненты</h1>
+            <p>
+              Плавный скролл с учётом шапки:
+              <a href="#tabs" data-goto><u>Табы</u></a> ·
+              <a href="#form" data-goto><u>Форма</u></a> ·
+              <a href="#parallax" data-goto><u>Параллакс</u></a> ·
+              <a href="#misc" data-goto><u>Разное</u></a>
+            </p>
+          </div>
+        </section>
+
+        <!-- Табы -->
+        <section class="section" id="tabs">
+          <div class="container">
+            <h2 class="section__title" data-animate="fade-up">Табы</h2>
+            <div class="tabs" data-tabs>
+              <div class="tabs__nav">
+                <button class="tabs__btn is-active" type="button" data-tab="one">Описание</button>
+                <button class="tabs__btn" type="button" data-tab="two">Характеристики</button>
+                <button class="tabs__btn" type="button" data-tab="three">Отзывы</button>
+              </div>
+              <div class="tabs__panel" data-tab-panel="one">Содержимое первой вкладки. Работают стрелки, Home и End.</div>
+              <div class="tabs__panel" data-tab-panel="two">Содержимое второй вкладки.</div>
+              <div class="tabs__panel" data-tab-panel="three">Содержимое третьей вкладки.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Селект + маска + количество -->
+        <section class="section" id="form">
+          <div class="container">
+            <h2 class="section__title" data-animate="fade-up">Селект, маска, количество</h2>
+            <form class="form" data-ajax action="#" data-popup-success="popup-ok">
+              <div class="field">
+                <label class="field__label" for="phone">Телефон</label>
+                <input class="field__input" id="phone" name="phone" data-mask="phone" required autocomplete="tel" />
+              </div>
+              <div class="field">
+                <label class="field__label" for="date">Дата (маска ##.##.####)</label>
+                <input class="field__input" id="date" name="date" data-mask="##.##.####" />
+              </div>
+              <div class="field">
+                <label class="field__label" for="city">Город</label>
+                <select id="city" name="city" data-select required data-error="Выберите город">
+                  <option value="">Выберите город</option>
+                  <option value="msk">Москва</option>
+                  <option value="spb">Санкт-Петербург</option>
+                  <option value="kzn">Казань</option>
+                  <option value="nsk">Новосибирск</option>
+                  <option value="ekb">Екатеринбург</option>
+                </select>
+              </div>
+              <div class="field">
+                <span class="field__label">Количество</span>
+                <div class="quantity" data-quantity>
+                  <button class="quantity__btn" type="button" data-quantity-minus aria-label="Меньше">−</button>
+                  <input class="quantity__input" type="number" name="qty" value="1" min="1" max="5" aria-label="Количество" />
+                  <button class="quantity__btn" type="button" data-quantity-plus aria-label="Больше">+</button>
+                </div>
+              </div>
+              <div><button class="btn" type="submit">Отправить</button></div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Параллакс -->
+        <section class="section" id="parallax">
+          <div class="container">
+            <h2 class="section__title" data-animate="fade-up">Параллакс</h2>
+            <div class="parallax">
+              <div class="parallax__bg" data-parallax="0.25"></div>
+              <div class="parallax__content">
+                <h3 style="font-size: 2rem">Фон смещается при прокрутке</h3>
+                <p>Слой <code>data-parallax="0.25"</code> движется медленнее страницы.</p>
+              </div>
+            </div>
+            <p style="margin-block: 1.5rem 0.75rem">Движение за мышью (на устройствах с курсором):</p>
+            <div class="parallax-mouse" data-parallax-mouse>
+              <div class="parallax-mouse__layer" data-depth="0.05"></div>
+              <div class="parallax-mouse__layer" data-depth="0.12"></div>
+              <div class="parallax-mouse__layer" data-depth="0.25"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Разное -->
+        <section class="section" id="misc">
+          <div class="container">
+            <h2 class="section__title" data-animate="fade-up">Анимации, счётчики, «Показать больше», перенос блоков</h2>
+
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem">
+              <div data-animate="fade-up"><b style="font-size: 2.5rem" data-count="1500">0</b><br />клиентов</div>
+              <div data-animate="fade-up" data-delay="150"><b style="font-size: 2.5rem" data-count="320" data-count-duration="2500">0</b><br />проектов</div>
+              <div data-animate="zoom" data-delay="300"><b style="font-size: 2.5rem" data-count="12">0</b><br />лет на рынке</div>
+            </div>
+
+            <div class="showmore" data-showmore="72" style="max-width: 36rem; margin-bottom: 2rem">
+              <div class="showmore__content" data-showmore-content>
+                <p>Длинный текст, который сворачивается до заданной высоты. Кнопка появляется только если текст действительно не помещается. Длинный текст, который сворачивается до заданной высоты. Кнопка появляется только если текст действительно не помещается.</p>
+                <p>Ещё один абзац внутри скрытой части. Высота анимируется через max-height и пересчитывается при изменении размера окна.</p>
+                <p>И последний абзац для наглядности.</p>
+              </div>
+              <button class="showmore__btn" type="button" data-showmore-btn></button>
+            </div>
+
+            <p style="margin-bottom: 0.5rem">Динамический адаптив (уменьшите окно до &lt; 768px):</p>
+            <div class="da-demo">
+              <span class="btn" data-da=".da-demo__target, 767.98, last">Я переезжаю в рамку</span>
+              <div class="da-demo__target">Контейнер-цель</div>
+            </div>
+          </div>
+        </section>
+      </main>
+      @include("html/footer.html")
+    </div>
+
+    <dialog class="popup" id="popup-ok" data-popup aria-labelledby="popup-ok-title">
+      <div class="popup__body">
+        <button class="popup__close" type="button" data-popup-close aria-label="Закрыть">
+          <svg class="icon"><use href="#icon-close"></use></svg>
+        </button>
+        <h2 class="popup__title" id="popup-ok-title">Спасибо!</h2>
+        <p>Форма успешно отправлена.</p>
+      </div>
+    </dialog>
+
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>

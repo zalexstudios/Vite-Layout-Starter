@@ -1,0 +1,49 @@
+@use 'mixins' as *;
+
+.tabs {
+  // Линия под вкладками — inset-тень, а не border: так кнопкам не нужен отрицательный margin,
+  // из-за которого у блока с overflow-x появлялась вертикальная прокрутка
+  &__nav {
+    display: flex;
+    gap: to-rem(8);
+    box-shadow: inset 0 -1px 0 var(--color-border);
+    overflow: auto hidden; // по горизонтали — прокрутка на узких экранах, по вертикали — никогда
+    scrollbar-width: thin;
+  }
+
+  &__btn {
+    flex-shrink: 0;
+    padding: to-rem(12) to-rem(16);
+    border-bottom: 2px solid transparent;
+    color: var(--color-muted);
+    font-weight: 600;
+    white-space: nowrap;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: var(--color-text);
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: -2px;
+    }
+
+    &.is-active {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+  }
+
+  &__panel {
+    padding-block: to-rem(24);
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}

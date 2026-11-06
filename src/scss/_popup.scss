@@ -1,0 +1,47 @@
+@use 'mixins' as *;
+
+.popup {
+  width: 100%;
+  max-width: min(#{to-rem(480)}, calc(100% - #{to-rem(32)}));
+  padding: 0;
+  border: 0;
+  border-radius: to-rem(16);
+  color: var(--color-text);
+  background: var(--color-bg);
+
+  &::backdrop {
+    background: rgb(0 0 0 / 50%);
+  }
+
+  &[open] {
+    animation: popup-in 0.25s ease-out;
+  }
+
+  &__body {
+    position: relative;
+    padding: to-rem(32);
+  }
+
+  &__close {
+    position: absolute;
+    top: to-rem(12);
+    right: to-rem(12);
+    display: grid;
+    place-items: center;
+    width: to-rem(32);
+    height: to-rem(32);
+    font-size: to-rem(20);
+  }
+
+  &__title {
+    margin-bottom: to-rem(12);
+    font-size: to-rem(24);
+  }
+}
+
+@keyframes popup-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.98);
+  }
+}

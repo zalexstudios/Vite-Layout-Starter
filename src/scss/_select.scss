@@ -1,0 +1,89 @@
+@use 'mixins' as *;
+
+.select {
+  position: relative;
+
+  // Нативный select скрыт визуально, но остаётся в форме и доступен для валидации
+  &__native {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    clip-path: inset(50%);
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: to-rem(8);
+    width: 100%;
+    padding: to-rem(12) to-rem(14);
+    border: 1px solid var(--color-border);
+    border-radius: to-rem(8);
+    background: var(--color-bg);
+    text-align: left;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+
+    &:focus-visible,
+    &[aria-expanded='true'] {
+      border-color: var(--color-accent);
+      outline: none;
+      box-shadow: 0 0 0 3px rgb(79 70 229 / 20%);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .icon {
+      transition: rotate 0.2s;
+    }
+
+    &[aria-expanded='true'] .icon {
+      rotate: 180deg;
+    }
+  }
+
+  &__value.is-placeholder {
+    color: var(--color-muted);
+  }
+
+  &__list {
+    position: absolute;
+    inset: calc(100% + #{to-rem(4)}) 0 auto;
+    z-index: 20;
+    max-height: to-rem(240);
+    padding: to-rem(4);
+    border: 1px solid var(--color-border);
+    border-radius: to-rem(8);
+    background: var(--color-bg);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+    overflow: auto;
+  }
+
+  &__option {
+    padding: to-rem(10) to-rem(12);
+    border-radius: to-rem(6);
+    cursor: pointer;
+
+    &.is-active {
+      background: var(--color-bg-soft);
+    }
+
+    &[aria-selected='true'] {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+  }
+}
+
+.field.is-invalid .select__btn {
+  border-color: var(--color-error);
+}

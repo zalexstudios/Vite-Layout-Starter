@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    @include("html/head.html", {"title": "Компоненты", "description": "Попапы, слайдеры, формы, спойлеры, иконки"})
+  </head>
+  <body>
+    <div class="wrapper">
+      @include("html/header.html")
+      <main>
+        <!-- Слайдер (Swiper) -->
+        <section class="section">
+          <div class="container">
+            <h2 class="section__title">Слайдер</h2>
+            <div class="swiper slider" data-slider='{"loop":true,"breakpoints":{"768":{"slidesPerView":2},"992":{"slidesPerView":3}}}'>
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><div class="slide">Слайд 1</div></div>
+                <div class="swiper-slide"><div class="slide">Слайд 2</div></div>
+                <div class="swiper-slide"><div class="slide">Слайд 3</div></div>
+                <div class="swiper-slide"><div class="slide">Слайд 4</div></div>
+                <div class="swiper-slide"><div class="slide">Слайд 5</div></div>
+                <div class="swiper-slide"><div class="slide">Слайд 6</div></div>
+              </div>
+              <div class="swiper-pagination"></div>
+              <button class="swiper-button-prev" type="button" aria-label="Назад"></button>
+              <button class="swiper-button-next" type="button" aria-label="Вперёд"></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Спойлеры -->
+        <section class="section">
+          <div class="container">
+            <h2 class="section__title">Спойлеры</h2>
+            <div class="spoilers" data-spoilers data-spoilers-one>
+              <div class="spoiler is-open">
+                <button class="spoiler__title" type="button" data-spoiler aria-expanded="true">
+                  Как добавить страницу?
+                  <svg class="icon"><use href="#icon-chevron-down"></use></svg>
+                </button>
+                <div class="spoiler__body"><div class="spoiler__inner"><div class="spoiler__content">
+                  Создайте файл <code>src/имя.html</code> — он автоматически попадёт в сборку.
+                </div></div></div>
+              </div>
+              <div class="spoiler">
+                <button class="spoiler__title" type="button" data-spoiler aria-expanded="false">
+                  Можно открыть несколько сразу?
+                  <svg class="icon"><use href="#icon-chevron-down"></use></svg>
+                </button>
+                <div class="spoiler__body"><div class="spoiler__inner"><div class="spoiler__content">
+                  Уберите атрибут <code>data-spoilers-one</code> у контейнера.
+                </div></div></div>
+              </div>
+              <div class="spoiler">
+                <button class="spoiler__title" type="button" data-spoiler aria-expanded="false">
+                  Откуда берутся иконки?
+                  <svg class="icon"><use href="#icon-chevron-down"></use></svg>
+                </button>
+                <div class="spoiler__body"><div class="spoiler__inner"><div class="spoiler__content">
+                  Из файлов <code>src/img/icons/*.svg</code> — они собираются в SVG-спрайт.
+                </div></div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Форма + попапы -->
+        <section class="section">
+          <div class="container">
+            <h2 class="section__title">Форма и попап</h2>
+            <form class="form" data-ajax action="#" data-popup-success="popup-success" data-popup-error="popup-error">
+              <div class="field">
+                <label class="field__label" for="name">Имя</label>
+                <input class="field__input" id="name" name="name" type="text" required minlength="2" autocomplete="name" />
+              </div>
+              <div class="field">
+                <label class="field__label" for="email">Email</label>
+                <input class="field__input" id="email" name="email" type="email" required autocomplete="email" data-error="Укажите email, например name@mail.ru" />
+              </div>
+              <div class="field">
+                <label class="field__label" for="message">Сообщение</label>
+                <textarea class="field__input" id="message" name="message" required></textarea>
+              </div>
+              <div class="field">
+                <label class="field--check">
+                  <input type="checkbox" name="agree" required />
+                  <span>Согласен на обработку данных</span>
+                </label>
+              </div>
+              <div>
+                <button class="btn" type="submit">Отправить</button>
+                <button class="btn" type="button" data-popup-open="popup-info">Открыть попап</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Иконки -->
+        <section class="section">
+          <div class="container">
+            <h2 class="section__title">Иконки (SVG-спрайт)</h2>
+            <p style="display: flex; gap: 1rem; font-size: 2rem">
+              <svg class="icon"><use href="#icon-close"></use></svg>
+              <svg class="icon"><use href="#icon-check"></use></svg>
+              <svg class="icon"><use href="#icon-arrow-right"></use></svg>
+              <svg class="icon"><use href="#icon-chevron-down"></use></svg>
+            </p>
+          </div>
+        </section>
+      </main>
+      @include("html/footer.html")
+    </div>
+
+    <dialog class="popup" id="popup-info" data-popup aria-labelledby="popup-info-title">
+      <div class="popup__body">
+        <button class="popup__close" type="button" data-popup-close aria-label="Закрыть">
+          <svg class="icon"><use href="#icon-close"></use></svg>
+        </button>
+        <h2 class="popup__title" id="popup-info-title">Попап</h2>
+        <p>Закрывается по Esc, по крестику и по клику на подложку.</p>
+      </div>
+    </dialog>
+
+    <dialog class="popup" id="popup-success" data-popup aria-labelledby="popup-success-title">
+      <div class="popup__body">
+        <button class="popup__close" type="button" data-popup-close aria-label="Закрыть">
+          <svg class="icon"><use href="#icon-close"></use></svg>
+        </button>
+        <h2 class="popup__title" id="popup-success-title">Спасибо!</h2>
+        <p>Форма успешно отправлена.</p>
+      </div>
+    </dialog>
+
+    <dialog class="popup" id="popup-error" data-popup aria-labelledby="popup-error-title">
+      <div class="popup__body">
+        <button class="popup__close" type="button" data-popup-close aria-label="Закрыть">
+          <svg class="icon"><use href="#icon-close"></use></svg>
+        </button>
+        <h2 class="popup__title" id="popup-error-title">Ошибка</h2>
+        <p>Не удалось отправить форму. Попробуйте позже.</p>
+      </div>
+    </dialog>
+
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>

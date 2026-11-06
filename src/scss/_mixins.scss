@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'vars';
+
+// @include mq(md) { ... }  →  max-width: 767.98px
+@mixin mq($key) {
+  @media (max-width: #{map.get(vars.$bp, $key) - 0.02px}) {
+    @content;
+  }
+}
+
+// @include mq-up(md) { ... }  →  min-width: 768px
+@mixin mq-up($key) {
+  @media (min-width: map.get(vars.$bp, $key)) {
+    @content;
+  }
+}
+
+// to-rem(24) → 1.5rem
+@function to-rem($px, $base: 16) {
+  @return math.div($px, $base) * 1rem;
+}
+
+// Плавное значение между двумя размерами: font-size: fluid(32, 64);
+@function fluid($min, $max, $min-vw: 375, $max-vw: 1440) {
+  $slope: math.div($max - $min, $max-vw - $min-vw);
+  $base: $min - $slope * $min-vw;
+  @return clamp(#{to-rem($min)}, calc(#{to-rem($base)} + #{$slope * 100}vw), #{to-rem($max)});
+}

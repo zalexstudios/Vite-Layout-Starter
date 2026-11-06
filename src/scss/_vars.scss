@@ -1,0 +1,23 @@
+// Переменные Sass (для медиазапросов и расчётов)
+$container: 1200px;
+$padding: 15px;
+
+// Брейкпоинты (desktop-first, как в классической верстке)
+$bp: (
+  xl: 1200px,
+  lg: 992px,
+  md: 768px,
+  sm: 480px,
+);
+
+// CSS-переменные (для темизации и runtime)
+:root {
+  --color-bg: #ffffff;
+  --color-bg-soft: #f3f4f6;
+  --color-text: #1a1a1a;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-accent: #4f46e5;
+  --color-error: #dc2626;
+  --font-main: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
